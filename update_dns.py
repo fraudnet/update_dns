@@ -25,7 +25,7 @@ def _update_dns(ip, zone_id, hostname):
     dns.change_resource_record_sets(
         HostedZoneId=zone_id,
         ChangeBatch={
-            'Comment': 'Update {} record from ASG'.format(args.hostname),
+            'Comment': 'Update {} record from ASG'.format(hostname),
             'Changes': [{
                 'Action': 'UPSERT',
                 'ResourceRecordSet': {
