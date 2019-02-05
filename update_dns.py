@@ -3,7 +3,7 @@
 # copy of: https://gist.github.com/chrisguitarguy/e9cb271f6ac882627d0d61efe03dc8ae in order to avoid uncontrolled script changes.
 
 import argparse
-import http.client as http
+import requests
 import os
 import boto3 as aws
 
@@ -16,10 +16,8 @@ def _parse_args(args=None):
 
 
 def _get_local_ipv4():
-    conn = http.HTTPConnection('169.254.169.254', 80)
-    conn.request('GET', '/latest/meta-data/local-ipv4')
-    ipr = conn.getresponse()
-    return ipr.read().decode('utf-8')
+    r = requests.get("http://169.254.169.254/latest/meta-data/local-ipv4")
+    return r.content.decode("utf-8")
 
 
 def _update_dns(ip, zone_id, hostname):
