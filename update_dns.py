@@ -30,7 +30,7 @@ def _update_dns(ip, zone_id, hostname):
                 'Action': 'UPSERT',
                 'ResourceRecordSet': {
                     'Name': hostname,
-                    'Type': 'CNAME',
+                    'Type': 'A',
                     'TTL': 60,
                     'ResourceRecords': [{
                         'Value': ip
