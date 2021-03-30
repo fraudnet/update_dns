@@ -41,7 +41,7 @@ def _update_dns(ip, zone_id, hostname):
 def main(args=None):
     args = _parse_args(args)
 
-    _update_dns(args.ip, args.zone_id, args.hostname)
+    _update_dns(args.ipv4, args.zone_id, args.hostname)
 
 
 if __name__ == '__main__':
