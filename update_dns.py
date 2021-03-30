@@ -9,15 +9,12 @@ import boto3 as aws
 
 def _parse_args(args=None):
     p = argparse.ArgumentParser(description='Update a hostname record in route53 with the current IP address')
+    p.add_argument('ipv4', help='IPV4 to set up')
     p.add_argument('zone_id', help='The DNS zone id to update')
     p.add_argument('hostname', help='The DNS name to update')
+ 
 
     return p.parse_args(args)
-
-
-def _get_local_ipv4():
-    r = requests.get("http://169.254.169.254/latest/meta-data/local-ipv4")
-    return r.content.decode("utf-8")
 
 
 def _update_dns(ip, zone_id, hostname):
@@ -43,9 +40,8 @@ def _update_dns(ip, zone_id, hostname):
 
 def main(args=None):
     args = _parse_args(args)
-    ip = _get_local_ipv4()
 
-    _update_dns(ip, args.zone_id, args.hostname)
+    _update_dns(args.ip, args.zone_id, args.hostname)
 
 
 if __name__ == '__main__':
